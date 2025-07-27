@@ -1,5 +1,18 @@
 <script setup>
+// imports
+import q from "./data/quizes.json";
+import { ref, watch } from 'vue';
 
+// cons & vars
+const quizes = ref(q);
+const search = ref("");
+
+// watch
+watch(search, () =>
+  quizes.value = q.filter(
+    quiz => quiz.name.toLowerCase().includes(search.value.toLocaleLowerCase())
+  )
+);
 </script>
 
 <template>
@@ -7,15 +20,15 @@
     <div class="container">
       <header>
         <h1>Quizes</h1>
-        <input type="text" placeholder="search...">
+        <input v-model.trim="search" type="text" placeholder="search...">
       </header><!--./header-->
 
       <div class="options-container">
-        <div class="card">
-          <img src="https://i.ytimg.com/vi/Kp2bYWRQylk/maxresdefault.jpg" alt="Math">
+        <div class="card" v-for="quiz in quizes" :key="quiz.id">
+          <img :src="quiz.img" :alt="quiz.name">
           <div class="card-text">
-            <h2>Math</h2>
-            <p class="desc">15 questions</p>
+            <h2>{{ quiz.name }}</h2>
+            <p class="desc">{{ quiz.questions.length }} question</p>
           </div><!--./card-text-->
         </div><!--./card-->
       </div><!--./options-container-->
