@@ -25,7 +25,7 @@ watch(search, () =>
       </header><!--./header-->
 
       <div class="options-container">
-        <Card v-for="quiz in quizes" :key="quiz.id" />
+        <Card v-for="quiz in quizes" :key="quiz.id" :quiz="quiz" />
       </div><!--./options-container-->
     </div><!--./container-->
   </div>
