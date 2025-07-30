@@ -2,6 +2,7 @@
 // imports
 import q from "./data/quizes.json";
 import { ref, watch } from 'vue';
+import Card from "./components/Card.vue"
 
 // cons & vars
 const quizes = ref(q);
@@ -24,13 +25,7 @@ watch(search, () =>
       </header><!--./header-->
 
       <div class="options-container">
-        <div class="card" v-for="quiz in quizes" :key="quiz.id">
-          <img :src="quiz.img" :alt="quiz.name">
-          <div class="card-text">
-            <h2>{{ quiz.name }}</h2>
-            <p class="desc">{{ quiz.questions.length }} question</p>
-          </div><!--./card-text-->
-        </div><!--./card-->
+        <Card v-for="quiz in quizes" :key="quiz.id" />
       </div><!--./options-container-->
     </div><!--./container-->
   </div>
@@ -66,30 +61,5 @@ header input {
   flex-wrap: wrap;
 
   margin-top: 40px;
-}
-
-.card {
-  width: 310px;
-
-  margin: 0 20px 0 35px;
-  border-radius: 2%;
-
-  box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.1);
-  overflow: hidden;
-  cursor: pointer;
-}
-
-.card img {
-  width: 100%;
-  height: 190px;
-  margin: 0;
-}
-
-.card .card-text {
-  padding: 0 5px;
-}
-
-.card .card-text h2 {
-  font-weight: bold;
 }
 </style>
